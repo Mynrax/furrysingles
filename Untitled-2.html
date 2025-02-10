@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOT SINGLE FURRIES IN YOUR AREA!!1</title>
+    <link rel="stylesheet" href="https://unpkg.com/xp.css">
+    <style>
+        body {
+            background: url('https://i.imgur.com/VvNhMb0.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .window {
+            width: 600px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: popIn 0.5s ease-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .content {
+            text-align: center;
+        }
+        .content img {
+            width: 100%;
+            height: auto;
+            animation: dialUpLoad 1s steps(10) forwards;
+            clip-path: inset(100% 0 0 0);
+        }
+
+        @keyframes dialUpLoad {
+            0% {
+                clip-path: inset(100% 0 0 0);
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:nth-child(1):hover {
+            animation: violentShake 0.2s infinite;
+        }
+        @keyframes violentShake {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0);
+            }
+            25% {
+                transform: translate(3px, -3px) rotate(-1deg);
+            }
+            50% {
+                transform: translate(-3px, 3px) rotate(1deg);
+            }
+            75% {
+                transform: translate(4px, -4px) rotate(-0.5deg);
+            }
+        }
+
+        button:nth-child(1):hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            opacity: 0.2;
+            z-index: 0;
+            animation: rainbow 1s infinite;
+        }
+
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .title-bar-controls button {
+            animation: none; 
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="class01.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div class="window draggable" id="xpWindow">
+        <div class="title-bar">
+            <div class="title-bar-text">HOT FURRY SINGLES IN YOUR AREA! - Micwosoft Intewnyet Expwowew</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="redirect()"></button>
+            </div>
+        </div>
+        <div class="window-body content">
+            <img src="hot.jpg" alt="HOT SINGLE FURRIES IN YOUR AREA">
+            <p>
+                <button onclick="redirect()"><span>YESYESYESYESYESYE</span></button>
+                <button><span>no...</span></button>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function startMusic() {
+            const audio = document.getElementById("background-music");
+            audio.volume = 0.5;
+            audio.play().catch(() => {
+                document.body.addEventListener("click", () => {
+                    audio.play();
+                }, { once: true });
+            });
+        }
+        
+        document.addEventListener("DOMContentLoaded", startMusic);
+
+        function redirect() {
+            window.location.href = 'https://youtube.com/@MynraxLOL';
+        }
+        
+        document.addEventListener("click", function(event) {
+            const xpWindow = document.getElementById("xpWindow");
+            if (!xpWindow.contains(event.target)) {
+                let sound = new Audio("winding.wav");
+                sound.play();
+            }
+        });
+        
+        // Make the window draggable
+        const dragElement = (elm) => {
+            let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+            const dragMouseDown = (e) => {
+                e.preventDefault();
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                document.onmousemove = elementDrag;
+                document.onmouseup = closeDragElement;
+            };
+            const elementDrag = (e) => {
+                e.preventDefault();
+                posX = mouseX - e.clientX;
+                posY = mouseY - e.clientY;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                elm.style.top = (elm.offsetTop - posY) + "px";
+                elm.style.left = (elm.offsetLeft - posX) + "px";
+            };
+            const closeDragElement = () => {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            };
+            elm.querySelector(".title-bar").onmousedown = dragMouseDown;
+        };
+        dragElement(document.getElementById("xpWindow"));
+    </script>
+</body>
+</html>
